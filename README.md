@@ -58,6 +58,14 @@ CREATE external TABLE Flights (fl_date date, dep_delay  smallint, arr_delay  sma
 
 ## Druid
 
+docker run --rm -itd \
+    --name druid \
+    --network mynet \
+    -p 9999:9999 \
+    -v ./workspace:/workspace \
+    jdvelasq/druid:0.22.1
+
+
 
 ## superset
 docker run --rm -d -p 8080:8088 --name superset --network mynet acpmialj/ipmd:ssuperset
