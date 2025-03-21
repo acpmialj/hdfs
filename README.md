@@ -65,6 +65,7 @@ docker run --rm -itd \
     -v ./workspace:/workspace \
     jdvelasq/druid:0.22.1
 
+No acepta Parquet, hace falta una extensión. Propuesta: en Hive o Impala, hacer una copia en CSV (o JSON)
 
 
 ## superset
