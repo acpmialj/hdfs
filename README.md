@@ -44,6 +44,7 @@ select * from flights limit 10;
 
 ## Hive
 
+```
 docker run --rm -d -v ./workspace:/workspace -p 10000:10000 -p 10002:10002 --env SERVICE_NAME=hiveserver2 --network mynet --name hive apache/hive:3.1.3
 
 docker exec -it hive bash 
@@ -54,22 +55,26 @@ hadoop fs -put /workspace/flights-1m.parquet hdfs://namenode:9000/user/hive/vuel
 beeline -u 'jdbc:hive2://localhost:10000/'
 
 CREATE external TABLE Flights (fl_date date, dep_delay  smallint, arr_delay  smallint, air_time   smallint, distance  smallint, dep_time   float,  arr_time float) STORED AS PARQUET LOCATION 'hdfs://namenode:9000/user/hive/vuelos';
-
+```
 
 ## Druid
 
+```
 docker run --rm -itd \
     --name druid \
     --network mynet \
     -p 9999:9999 \
     -v ./workspace:/workspace \
     jdvelasq/druid:0.22.1
+```
 
 No acepta Parquet, hace falta una extensión. Propuesta: en Hive o Impala, hacer una copia en CSV (o JSON)
 
 
 ## superset
+```
 docker run --rm -d -p 8080:8088 --name superset --network mynet acpmialj/ipmd:ssuperset
+```
 
 webUI en http://localhost:8080 (admin/admin)
 Conexión a Impala como "Other", "impala://impala:21050/default"
